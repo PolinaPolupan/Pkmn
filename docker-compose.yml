@@ -1,16 +1,34 @@
-
 services:
-  web:
+  pkmn-app:
+    image: pkmn-tag
     build: .
-    environment:
-      # External PostgreSQL database URL
-      - JPA_DATABASE_URL=jdbc:postgresql://services.tms-studio.ru:8095/pkmn_db_test
-      - JPA_DATABASE_USER=pkmn_user
-      - JPA_DATABASE_PASSWORD=pkmn_password
+    restart: always
     ports:
       - "8080:8080"
     volumes:
-      - ./build/libs/pkmn.war:/usr/local/tomcat/webapps/ROOT.war
+      - pkmn-db-migration:/db/migration
+    environment:
+      DATABASE_URL: pkmn-database
+    depends_on:
+      - pkmn-database
+    networks:
+      - pkmn-net
+
+  pkmn-database:
+    image: postgres:17.2-alpine
+    restart: "no"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pkmn-database_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: pkmn_user
+      POSTGRES_PASSWORD: pkmn_password
+      POSTGRES_DB: pkmn_db
+    networks:
+      - pkmn-net
 
 volumes:
-  postgres_data:
+  pkmn-database_data:
+networks:
+  pkmn-net:
