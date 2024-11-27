@@ -1,6 +1,7 @@
 package ru.mirea.pkmn;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -15,8 +16,7 @@ import ru.mirea.pkmn.utils.ResourceFileLoader;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 @SpringBootApplication
@@ -43,15 +43,13 @@ public class PkmnApplication {
 
         ResourceFileLoader loader = context.getBean(ResourceFileLoader.class);
 
-        logger.setLevel(Level.FINE);
-
         Card cardFile = CardImport.parseCard(loader.getResourcePath("my_card.txt"));
 
         PkmnHttpClient.PokemonCardCallback callback = new PkmnHttpClient.PokemonCardCallback() {
             @Override
             public void onSuccess(JsonNode cardData) {
 
-                logger.log(Level.INFO,"Card data: " + cardData); // Log data
+                logger.info("Card data: " + cardData); // Log data
 
                 List<JsonNode> attacks = cardData.findValues("attacks"); // Find attacks section
 
@@ -60,7 +58,7 @@ public class PkmnApplication {
                 for (final JsonNode objNode : attacks) {
                     JsonNode text = objNode.findValue("text");
 
-                    logger.log(Level.INFO, "Attack description: " + text.toString().replace('"', ' ').strip() );
+                    logger.info("Attack description: " + text.toString().replace('"', ' ').strip() );
 
                     assert cardFile != null;
                  //   cardFile.setSkillDescription(ind, text.toString());
@@ -77,7 +75,7 @@ public class PkmnApplication {
 
             @Override
             public void onError(Throwable error) {
-                logger.log(Level.SEVERE,"Failed to fetch card: " + error.getMessage());
+                logger.error("Failed to fetch card: " + error.getMessage());
             }
         };
 
@@ -97,11 +95,11 @@ public class PkmnApplication {
         StudentEntity student = service.getStudent("Polina Polupan Mikhailovna");
         service.getCard(student);
 
-        logger.log(Level.INFO, student.toString());
+        logger.info(student.toString());
 
         UUID uuid = UUID.fromString("05be7b93-17fa-3459-a0f4-c62f7628796d");
         CardEntity dCardEntity = service.getCard(uuid);
 
-        logger.log(Level.INFO, dCardEntity.toString());
+        logger.info(dCardEntity.toString());
     }
 }

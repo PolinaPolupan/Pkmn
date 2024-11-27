@@ -36,6 +36,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.data:spring-data-jdbc")
     implementation("org.springframework.boot:spring-boot-configuration-processor:2.5.12")
+    implementation("org.springframework.boot:spring-boot-starter-logging")
 
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-databind")
@@ -47,8 +48,6 @@ dependencies {
     implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
     implementation("org.hibernate.orm:hibernate-core:6.3.0.Final")
     implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
-    implementation("org.slf4j:slf4j-api:2.0.9")
-    implementation("org.slf4j:slf4j-simple:2.0.9")
     implementation("com.google.code.gson:gson:2.7")
 
     runtimeOnly("org.flywaydb:flyway-gradle-plugin:3.0")

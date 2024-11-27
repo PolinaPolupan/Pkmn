@@ -8,6 +8,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
 import ru.mirea.pkmn.entity.StudentEntity;
 import ru.mirea.pkmn.repository.PkmnRepository;
 import ru.mirea.pkmn.entity.CardEntity;
@@ -15,7 +16,7 @@ import ru.mirea.pkmn.repository.PkmnRepositoryImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
-import java.util.logging.Logger;
+
 
 @WebServlet(urlPatterns = "/cards/*", loadOnStartup = 1)
 public class CardServlet extends HttpServlet {
@@ -30,13 +31,12 @@ public class CardServlet extends HttpServlet {
 
         // Retrieve the EntityManager from the servlet context
         EntityManager em = (EntityManager) config.getServletContext().getAttribute("entityManager");
-        logger = Logger.getLogger(CardServlet.class.getName());
 
         if (em != null) {
             pkmnRepository = new PkmnRepositoryImpl(em, logger);
             logger.info("PkmnRepository initialized successfully");
         } else {
-            logger.severe("EntityManager is null in CardServlet");
+            logger.error("EntityManager is null in CardServlet");
             throw new ServletException("Failed to initialize CardServlet: EntityManager is null");
         }
     }

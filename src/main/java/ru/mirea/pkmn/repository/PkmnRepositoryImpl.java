@@ -2,14 +2,13 @@ package ru.mirea.pkmn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.mirea.pkmn.entity.CardEntity;
 import ru.mirea.pkmn.entity.StudentEntity;
-import ru.mirea.pkmn.entity.*;
 
 import java.util.UUID;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class PkmnRepositoryImpl implements PkmnRepository {
 
@@ -32,7 +31,7 @@ public class PkmnRepositoryImpl implements PkmnRepository {
                     .getResultList()
                     .get(0);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to find card by name: " + name, e);
+            logger.error("Failed to find card by name: " + name, e);
         }
         return null;
     }
@@ -50,7 +49,7 @@ public class PkmnRepositoryImpl implements PkmnRepository {
                     .getResultList()
                     .get(0);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to find card with owner: " + student, e);
+            logger.error("Failed to find card with owner: " + student, e);
         }
         return null;
     }
@@ -59,7 +58,7 @@ public class PkmnRepositoryImpl implements PkmnRepository {
     public StudentEntity getStudent(String fullName) {
         String[] parts = fullName.split(" ");
         if (parts.length != 3) {
-            logger.log(Level.WARNING, "Invalid student name format: " + fullName);
+            logger.error("Invalid student name format: " + fullName);
             return null;
         }
         try {
@@ -71,7 +70,7 @@ public class PkmnRepositoryImpl implements PkmnRepository {
                     .setParameter("surName", parts[2])
                     .getSingleResult();
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Failed to find student: " + fullName, e);
+            logger.error("Failed to find student: " + fullName, e);
         }
         return null;
     }
@@ -92,12 +91,12 @@ public class PkmnRepositoryImpl implements PkmnRepository {
                 tx.begin();
                 em.merge(card);
                 tx.commit();
-                logger.log(Level.INFO, "Card saved: " + card);
+                logger.info("Card saved: " + card);
             }
 
         } catch (Exception e) {
             tx.rollback();
-            logger.log(Level.SEVERE, "Failed to save card: " + e.getMessage(), e);
+            logger.error("Failed to save card: " + e.getMessage(), e);
         }
 
        if (card.getEvolvesFrom() != null) saveCard(card.getEvolvesFrom());
@@ -112,11 +111,11 @@ public class PkmnRepositoryImpl implements PkmnRepository {
             tx.begin();
             em.merge(student);
             tx.commit();
-            logger.log(Level.INFO, "Student saved: " + student.getFirstName());
+            logger.info("Student saved: " + student.getFirstName());
 
         } catch (Exception e) {
             tx.rollback();
-            logger.log(Level.SEVERE, "Failed to save student: " + e.getMessage(), e);
+            logger.error("Failed to save student: " + e.getMessage(), e);
         }
     }
 

@@ -1,13 +1,13 @@
 package ru.mirea.pkmn.utils;
 
 import com.google.common.io.Resources;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.io.FileInputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ResourceFileLoader {
 
@@ -29,7 +29,7 @@ public class ResourceFileLoader {
             return new FileInputStream(path.toString());
 
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Unable to load resource: " + e.getMessage());
+            logger.error("Unable to load resource: " + e.getMessage());
         }
 
         return null;
@@ -45,7 +45,7 @@ public class ResourceFileLoader {
             return path.toString();
 
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Unable to get resource path: " + e.getMessage());
+            logger.error("Unable to get resource path: " + e.getMessage());
         }
 
         return null;
