@@ -93,9 +93,10 @@ public class PkmnApplication {
 
         service.saveCard(card.toEntity());
 
-       // StudentEntity student = service.getStudent("Polina Polupan Mikhailovna");
+        StudentEntity student = service.getStudent("Polina Polupan Mikhailovna");
+        service.getCard(student);
 
-     //   logger.log(Level.INFO, student.toString());
+        logger.log(Level.INFO, student.toString());
 
         UUID uuid = UUID.fromString("05be7b93-17fa-3459-a0f4-c62f7628796d");
         CardEntity dCardEntity = service.getCard(uuid);

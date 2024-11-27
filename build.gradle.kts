@@ -29,6 +29,14 @@ configurations {
 dependencies {
     // Spring Boot
     implementation(platform("org.springframework.boot:spring-boot-dependencies:2.2.4.RELEASE"))
+    implementation("org.springframework:spring-beans:6.1.14")
+    implementation("org.springframework.boot:spring-boot-autoconfigure:3.3.5")
+    implementation("org.springframework:spring-context:6.1.14")
+    implementation("org.springframework.boot:spring-boot:3.3.5")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.data:spring-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-configuration-processor:2.5.12")
+
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
@@ -36,10 +44,6 @@ dependencies {
     implementation("org.postgresql:postgresql")
     implementation("com.google.guava:guava:20.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("org.springframework:spring-beans:6.1.14")
-    implementation("org.springframework.boot:spring-boot-autoconfigure:3.3.5")
-    implementation("org.springframework:spring-context:6.1.14")
-    implementation("org.springframework.boot:spring-boot:3.3.5")
     implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
     implementation("org.hibernate.orm:hibernate-core:6.3.0.Final")
     implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
@@ -47,6 +51,7 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.9")
     implementation("com.google.code.gson:gson:2.7")
 
+    runtimeOnly("org.flywaydb:flyway-gradle-plugin:3.0")
     compileOnly("org.jetbrains:annotations:24.1.0")
     compileOnly ("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
