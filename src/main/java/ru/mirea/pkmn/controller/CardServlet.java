@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.controller;
+package ru.mirea.pkmn.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
@@ -8,10 +8,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ru.mirea.pkmn.polupanpolina.entity.StudentEntity;
-import ru.mirea.pkmn.polupanpolina.repository.PkmnRepository;
-import ru.mirea.pkmn.polupanpolina.entity.CardEntity;
-import ru.mirea.pkmn.polupanpolina.repository.PkmnRepositoryImpl;
+import ru.mirea.pkmn.entity.StudentEntity;
+import ru.mirea.pkmn.repository.PkmnRepository;
+import ru.mirea.pkmn.entity.CardEntity;
+import ru.mirea.pkmn.repository.PkmnRepositoryImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;

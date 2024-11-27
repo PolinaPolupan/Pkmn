@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.entity;
+package ru.mirea.pkmn.entity;
 
 import com.vladmihalcea.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UuidGenerator;
-import ru.mirea.pkmn.AttackSkill;
+import ru.mirea.pkmn.model.AttackSkill;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.network;
+package ru.mirea.pkmn.network;
 
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import okhttp3.OkHttpClient;

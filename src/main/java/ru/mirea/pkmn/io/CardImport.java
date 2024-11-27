@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.io;
+package ru.mirea.pkmn.io;
 
 import java.io.*;
 import java.net.URL;
@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.google.common.io.Resources;
 import ru.mirea.pkmn.*;
+import ru.mirea.pkmn.model.*;
+import ru.mirea.pkmn.model.*;
 
 /**
  * Utility helper class creates Card instances from a file

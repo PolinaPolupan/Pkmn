@@ -1,9 +1,11 @@
-package ru.mirea.pkmn.polupanpolina.repository;
+package ru.mirea.pkmn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.mirea.pkmn.polupanpolina.entity.*;
+import ru.mirea.pkmn.entity.CardEntity;
+import ru.mirea.pkmn.entity.StudentEntity;
+import ru.mirea.pkmn.entity.*;
 
 import java.util.UUID;
 import java.util.logging.Level;

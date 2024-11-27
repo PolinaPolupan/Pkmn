@@ -1,6 +1,6 @@
-package ru.mirea.pkmn.polupanpolina.io;
+package ru.mirea.pkmn.io;
 
-import ru.mirea.pkmn.Card;
+import ru.mirea.pkmn.model.Card;
 import ru.mirea.pkmn.PkmnApplication;
 
 import java.io.*;

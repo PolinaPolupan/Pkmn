@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.repository;
+package ru.mirea.pkmn.repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

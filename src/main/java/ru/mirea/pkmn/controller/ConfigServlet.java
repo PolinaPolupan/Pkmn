@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.controller;
+package ru.mirea.pkmn.controller;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

@@ -1,9 +1,9 @@
-package ru.mirea.pkmn;
+package ru.mirea.pkmn.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.mirea.pkmn.polupanpolina.entity.CardEntity;
+import ru.mirea.pkmn.entity.CardEntity;
 
 import java.io.Serializable;
 import java.util.List;

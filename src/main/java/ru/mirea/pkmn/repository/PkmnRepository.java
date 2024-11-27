@@ -1,7 +1,7 @@
-package ru.mirea.pkmn.polupanpolina.repository;
+package ru.mirea.pkmn.repository;
 
-import ru.mirea.pkmn.polupanpolina.entity.CardEntity;
-import ru.mirea.pkmn.polupanpolina.entity.StudentEntity;
+import ru.mirea.pkmn.entity.CardEntity;
+import ru.mirea.pkmn.entity.StudentEntity;
 
 import java.util.UUID;
 

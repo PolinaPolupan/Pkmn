@@ -1,4 +1,4 @@
-package ru.mirea.pkmn.polupanpolina.entity;
+package ru.mirea.pkmn.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

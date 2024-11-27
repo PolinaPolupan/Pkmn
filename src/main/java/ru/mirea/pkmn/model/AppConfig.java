@@ -1,8 +1,9 @@
-package ru.mirea.pkmn;
+package ru.mirea.pkmn.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.mirea.pkmn.polupanpolina.utils.ResourceFileLoader;
+import ru.mirea.pkmn.PkmnApplication;
+import ru.mirea.pkmn.utils.ResourceFileLoader;
 
 import java.util.logging.Logger;
 

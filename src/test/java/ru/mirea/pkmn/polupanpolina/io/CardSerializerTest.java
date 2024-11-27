@@ -2,10 +2,10 @@
 //
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
-//import ru.mirea.pkmn.Card;
-//import ru.mirea.pkmn.EnergyType;
-//import ru.mirea.pkmn.PokemonStage;
-//import ru.mirea.pkmn.Student;
+//import ru.mirea.pkmn.polupanpolina.model.Card;
+//import ru.mirea.pkmn.polupanpolina.model.EnergyType;
+//import ru.mirea.pkmn.polupanpolina.model.PokemonStage;
+//import ru.mirea.pkmn.polupanpolina.model.Student;
 //
 //import java.io.File;
 //import java.util.ArrayList;

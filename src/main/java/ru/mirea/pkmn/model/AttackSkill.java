@@ -1,4 +1,4 @@
-package ru.mirea.pkmn;
+package ru.mirea.pkmn.model;
 
 import java.io.Serializable;
 
