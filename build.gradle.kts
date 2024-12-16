@@ -1,7 +1,6 @@
 plugins {
     java
     application
-    id("war")
     id("org.springframework.boot") version "3.3.5"
     id("io.spring.dependency-management") version "1.1.6"
     id("com.autonomousapps.dependency-analysis") version "2.4.2"
@@ -9,12 +8,6 @@ plugins {
 
 group = "ru.mirea"
 version = "0.0.1-SNAPSHOT"
-
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
 
 repositories {
     mavenCentral()
@@ -27,40 +20,46 @@ configurations {
 }
 
 dependencies {
-    // Spring Boot
+    // Spring Boot (Aligned with Spring Boot 2.2.4.RELEASE)
     implementation(platform("org.springframework.boot:spring-boot-dependencies:2.2.4.RELEASE"))
-    implementation("org.springframework:spring-beans:6.1.14")
-    implementation("org.springframework.boot:spring-boot-autoconfigure:3.3.5")
-    implementation("org.springframework:spring-context:6.1.14")
-    implementation("org.springframework.boot:spring-boot:3.3.5")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.data:spring-data-jdbc")
-    implementation("org.springframework.boot:spring-boot-configuration-processor:2.5.12")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-logging")
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
 
+    // Database
+    implementation("org.postgresql:postgresql")
+    runtimeOnly("org.flywaydb:flyway-core")
+
+    // JSON Handling
     implementation("com.fasterxml.jackson.core:jackson-core")
     implementation("com.fasterxml.jackson.core:jackson-databind")
+
+    // HTTP Client and Utilities
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-jackson:2.11.0")
-    implementation("org.postgresql:postgresql")
-    implementation("com.google.guava:guava:20.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
-    implementation("org.hibernate.orm:hibernate-core:6.3.0.Final")
-    implementation("com.vladmihalcea:hibernate-types-60:2.21.1")
+    implementation("com.google.guava:guava:20.0")
     implementation("com.google.code.gson:gson:2.7")
 
-    runtimeOnly("org.flywaydb:flyway-gradle-plugin:3.0")
+    // Hibernate
+    implementation("org.hibernate.orm:hibernate-core:6.3.0.Final")
+    implementation("com.vladmihalcea:hibernate-types-60:2.21.1") // Compatible with Hibernate 5.x
+
+    // Jakarta Servlet API
+    implementation("javax.servlet:javax.servlet-api:4.0.1") // Compatible with Spring Boot 2.x
+
+    // Annotations
     compileOnly("org.jetbrains:annotations:24.1.0")
-    compileOnly ("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 
-    testCompileOnly("org.projectlombok:lombok")
-    testAnnotationProcessor("org.projectlombok:lombok")
-
+    // Testing
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.5")
-    testImplementation("junit:junit")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.5")
 }
+
 
 tasks {
     test {
@@ -68,10 +67,23 @@ tasks {
     }
 }
 
-application {
-    mainClass.set("ru.mirea.pkmn.PkmnApplication")
+tasks {
+    bootJar {
+        layered {
+            enabled=true
+        }
+        archiveBaseName.set("app")
+        archiveVersion.set("") // Removes version from the file name
+    }
 }
 
-tasks.named<War>("war") {
-    archiveFileName.set("pkmn.war")
+tasks.withType<Jar> {
+    enabled = true
+}
+
+tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+    layered {
+        enabled=true
+    }
+    enabled = true
 }

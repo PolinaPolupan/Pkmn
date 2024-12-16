@@ -1,4 +1,5 @@
 services:
+  # сервис spring boot приложения
   pkmn-app:
     image: pkmn-tag
     build: .
@@ -14,6 +15,7 @@ services:
     networks:
       - pkmn-net
 
+  # сервис базы данных postgresql
   pkmn-database:
     image: postgres:17.2-alpine
     restart: "no"
@@ -30,5 +32,6 @@ services:
 
 volumes:
   pkmn-database_data:
+  pkmn-db-migration:
 networks:
   pkmn-net:

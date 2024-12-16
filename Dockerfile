@@ -1,14 +1,31 @@
-# Use official Tomcat image
-FROM tomcat:10.1.14-jdk17
+# Build stage
+FROM gradle:latest AS build
 
-# Remove the default Tomcat ROOT application
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
+# Set working directory and copy project files
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
 
-# Copy the WAR file from the Gradle build directory
-COPY build/libs/pkmn.war /usr/local/tomcat/webapps/ROOT.war
+# Build the Spring Boot application
+RUN gradle bootJar --no-daemon
 
-# Expose port 8080 for web traffic
-EXPOSE 8080
+# Final stage
+FROM bellsoft/liberica-openjre-alpine:21
 
-CMD ["catalina.sh", "run"]
+# Create a volume for temporary files
+VOLUME /tmp
 
+# Add a non-root user for better security
+RUN adduser -S spring-user
+USER spring-user
+
+# Set the working directory for the application
+WORKDIR /app
+
+# Copy the built JAR file from the build stage
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/
+
+# Copy migration scripts into the app directory
+COPY db ./db
+
+# Run the application directly with the JAR
+ENTRYPOINT ["java", "-jar", "app.jar"]

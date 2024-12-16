@@ -5,13 +5,12 @@ import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import ru.mirea.pkmn.entity.CardEntity;
-import ru.mirea.pkmn.entity.StudentEntity;
 import ru.mirea.pkmn.io.CardExport;
 import ru.mirea.pkmn.io.CardImport;
 import ru.mirea.pkmn.model.Card;
 import ru.mirea.pkmn.network.PkmnHttpClient;
-import ru.mirea.pkmn.repository.PkmnRepository;
 import ru.mirea.pkmn.utils.ResourceFileLoader;
 
 import java.util.List;
@@ -20,6 +19,7 @@ import java.util.UUID;
 
 
 @SpringBootApplication
+@EnableJpaRepositories("ru.mirea.pkmn.repository")
 public class PkmnApplication {
 
     static ApplicationContext context;
@@ -30,11 +30,11 @@ public class PkmnApplication {
 
         PkmnHttpClient pkmnHttpClient = context.getBean(PkmnHttpClient.class);
 
-        PkmnRepository dbService = context.getBean(PkmnRepository.class);
+       // PkmnRepository dbService = context.getBean(PkmnRepository.class);
 
-        testNetwork(pkmnHttpClient);
+     //   testNetwork(pkmnHttpClient);
 
-        testDatabase(dbService);
+       // testDatabase(dbService);
     }
 
     public static void testNetwork(PkmnHttpClient client) {
@@ -82,24 +82,24 @@ public class PkmnApplication {
         client.getPokemonCard("azumarill", "h4", callback);
     }
 
-    public static void testDatabase(PkmnRepository service) {
-
-        Logger logger = context.getBean(Logger.class); // Create logger
-
-        ResourceFileLoader loader = context.getBean(ResourceFileLoader.class);
-
-        Card card = CardImport.parseCard(loader.getResourcePath("my_card_test.txt"));
-
-        service.saveCard(card.toEntity());
-
-        StudentEntity student = service.getStudent("Polina Polupan Mikhailovna");
-        service.getCard(student);
-
-        logger.info(student.toString());
-
-        UUID uuid = UUID.fromString("05be7b93-17fa-3459-a0f4-c62f7628796d");
-        CardEntity dCardEntity = service.getCard(uuid);
-
-        logger.info(dCardEntity.toString());
-    }
+//    public static void testDatabase(PkmnRepository service) {
+//
+//        Logger logger = context.getBean(Logger.class); // Create logger
+//
+//        ResourceFileLoader loader = context.getBean(ResourceFileLoader.class);
+//
+//        Card card = CardImport.parseCard(loader.getResourcePath("my_card_test.txt"));
+//
+//        service.saveCard(card.toEntity());
+//
+////        StudentEntity student = service.getStudent("Polina Polupan Mikhailovna");
+////        service.getCard(student);
+//
+//      ///  logger.info(student.toString());
+//
+//        UUID uuid = UUID.fromString("05be7b93-17fa-3459-a0f4-c62f7628796d");
+//        CardEntity dCardEntity = service.getCard(uuid);
+//
+//        logger.info(dCardEntity.toString());
+//    }
 }
